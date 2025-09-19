@@ -74,7 +74,7 @@ report 50150 MouldGearLiftReport
             column(Blow_Mould_Life_Usage__; "Blow Mould Life Usage %")
             {
             }
-            column(PurchaseHeader; PurchaseHeader)
+            column(PurchaseHeader; '')
             {
             }
             dataitem("Mould Ledger Entries"; "Mould Ledger Entries")
@@ -119,16 +119,7 @@ report 50150 MouldGearLiftReport
                 {
                 }
             }
-            trigger OnAfterGetRecord()
-            var
-                PuchaseHeader: Record "Purchase Header";
-            begin
-                PuchaseHeader.SetRange("No.", "Mould Master"."PO No.");
-                if PuchaseHeader.FindFirst() then
-                    PurchaseHeader := PuchaseHeader."Shortcut Dimension 2 Code";
-            end;
+
         }
     }
-    var
-        PurchaseHeader: Text;
 }
