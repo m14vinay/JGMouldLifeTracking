@@ -47,11 +47,11 @@ page 50150 "Mould Master"
                     ToolTip = 'Specifies the value of the Mould Model field.', Comment = '%';
                     Visible = false;
                 }
-                 field("Work Center"; Rec."Work Center")
+                field("Work Center"; Rec."Work Center")
                 {
                     ToolTip = 'Specifies the value of the Work Center field.', Comment = '%';
                 }
-                 field(Manufacturer; Rec.Manufacturer)
+                field(Manufacturer; Rec.Manufacturer)
                 {
                     ToolTip = 'Specifies the value of the Manufacturer field.', Comment = '%';
                 }
@@ -62,8 +62,31 @@ page 50150 "Mould Master"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(ModuleGearLiftReport)
+            {
+                ApplicationArea = All;
+                Caption = 'Print Module Gear Lift';
+                Image = Report; // Optional icon
+                trigger OnAction()
+                var
+                    MyReportID: Integer;
+                    DocumentNo: Record "Mould Master";
+                begin
+                    MyReportID := Report::MouldGearLiftReport;
+                    DocumentNo.Reset();
+                    DocumentNo.SetRange("PO No.", Rec."PO No.");
+                    If DocumentNo.FindSet() then
+                        Report.RunModal(MyReportID, true, false, DocumentNo);
+                end;
+            }
+        }
+    }
     trigger OnOpenPage()
     begin
-        Rec.CalcFields("Blank Mould Life (Usage)","Blow Mould Life (Usage)");
+        Rec.CalcFields("Blank Mould Life (Usage)", "Blow Mould Life (Usage)");
     end;
 }
