@@ -74,7 +74,7 @@ report 50150 MouldGearLiftReport
             column(Blow_Mould_Life_Usage__; "Blow Mould Life Usage %")
             {
             }
-            column(PurchaseHeader; '')
+            column(PurchaseHeader; "Job No.")
             {
             }
             dataitem("Mould Ledger Entries"; "Mould Ledger Entries")
